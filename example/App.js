@@ -32,7 +32,7 @@ export default class App extends React.Component {
   }
 
   renderIcon = (row, col) => {
-    var value= this.gameState[row][col];
+    var value= this.state.gameState[row][col];
     switch(value)
     {
       case 1: return <Icon name="close" style={styles.tileX}/>;
