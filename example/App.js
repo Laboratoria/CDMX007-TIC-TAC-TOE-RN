@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Alert } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 export default class App extends React.Component {
@@ -31,7 +31,42 @@ export default class App extends React.Component {
     });
   }
 
- 
+  //Returns 1 if Player1 won, -1 if Player 2 won, or a 0 if no one has won
+  getWinner = () =>{
+    const NUM_TILES = 3;
+    var arr = this.state.gameState;
+    var sum;
+
+    //Check rows...
+    for (var i = 0; i < NUM_TILES; i++){
+      sum = arr[i][0] + arr[i][1] + arr[i][2];
+      if (sum == 3){return 1;}
+      else if (sum == -3){return -1;}
+    }
+
+    //Check columns..
+    for (var i = 0; i < NUM_TILES; i++){
+      sum = arr[0][i] + arr[1][i] + arr[2][i];
+      if (sum == 3){ return 1; }
+      else if (sum == -3){ return -1 ;}
+    }
+
+    //Check the diagonals...
+    sum = arr[0][0] + arr[1][1] + arr[2][2];
+    if (sum == 3){ return 1; }
+    else if (sum == -3){ return -1; }
+      
+    sum = arr[2][0] + arr[1][1] + arr[0][2];
+    if (sum == 3){ return 1; }
+    else if (sum == -3){return -1;}
+    
+    sum = arr[2][0] + arr[1][1] + arr[0][2];
+    if (sum == 3){ return 1; }
+    else if (sum == -3){ return -1; }
+
+    //There are no winners...
+    return 0;
+  }
 
   onTilePress = (row, col) => {
     //Don't allow tiles to change..
@@ -49,6 +84,16 @@ export default class App extends React.Component {
     //Switch to other player...
     var nextPlayer = (currentPlayer == 1) ? -1 : 1;
     this.setState({currentPlayer: nextPlayer})
+
+    //Check for winners...
+    var winner = this.getWinner();
+    if (winner == 1){
+      Alert.alert("El jugador 1 es el ganador");
+      this.initializeGame();
+    } else if(winner == -1){
+      Alert.alert("El jugador 2 es el ganador");
+      this.initializeGame();
+    }
   }
 
   renderIcon = (row, col) => {
