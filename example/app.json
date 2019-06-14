@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "my tic tac toe",
-    "slug": "example",
+    "slug": "tic-tac-gg",
     "privacy": "public",
     "sdkVersion": "33.0.0",
     "platforms": [
@@ -25,6 +25,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": ""
   }
 }
