@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Alert, Button } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
 export default class App extends React.Component {
@@ -96,6 +96,10 @@ export default class App extends React.Component {
     }
   }
 
+  onNewGamePress =() =>{
+    this.initializeGame();
+  }
+
   renderIcon = (row, col) => {
     var value = this.state.gameState[row][col];
     switch (value) {
@@ -150,6 +154,9 @@ export default class App extends React.Component {
             {this.renderIcon(2, 2)}
           </TouchableOpacity>
         </View>
+
+        <View style={{paddingTop:50}}/>
+        <Button title='New Game' onPress={this.onNewGamePress} />
 
       </View>
     );
