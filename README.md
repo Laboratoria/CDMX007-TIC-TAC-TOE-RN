@@ -320,15 +320,15 @@ expo publish
 ### UI
 
 * [x] Muestra grilla (grid) de 3x3
-* [ ] Muestra jugador al que le toca su turno
+* [x] Muestra jugador al que le toca su turno
 * [x] Permite marcar cajita vacía
 * [x] Cambia el turno después de marcar cajita
-* [ ] No permite marcar cajita ya marcada
-* [ ] Permite reiniciar la partida
+* [x] No permite marcar cajita ya marcada
+* [x] Permite reiniciar la partida
 * [x] Detecta jugadas ganadoras en eje x
 * [x] Detecta jugadas ganadoras en eje y
 * [x] Detecta jugadas ganadoras en diagonales
 * [x] Muestra jugador ganador cuando gana
 * [ ] Muestra jugada ganadora cuando hay ganador
 * [ ] Muestra empate cuando nadie gana y no quedan cajitas que marcar
-* [ ] Permire volver a empezar cuando termina una partida (alguien ganó o empate)
+* [x] Permire volver a empezar cuando termina una partida (alguien ganó o empate)

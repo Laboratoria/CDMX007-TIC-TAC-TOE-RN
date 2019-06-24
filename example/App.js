@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity, Alert, Button } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { StyleSheet, View, TouchableOpacity, Alert, Button, Text, Image, ImageBackground} from 'react-native';
+
 
 export default class App extends React.Component {
 
@@ -87,14 +87,17 @@ export default class App extends React.Component {
 
     //Check for winners...
     var winner = this.getWinner();
-    if (winner == 1){
-      Alert.alert("El jugador 1 es el ganador");
+    if (winner === 1){
+      Alert.alert("The winner is Player 1");
       this.initializeGame();
-    } else if(winner == -1){
-      Alert.alert("El jugador 2 es el ganador");
+    } else if(winner === -1){
+      Alert.alert("The winer is Player 2");
       this.initializeGame();
-    }
+    } else if(winner != -1 && winner ==7){
+      Alert.alert("No one is winner");
+      this.initializeGame();
   }
+}
 
   onNewGamePress =() =>{
     this.initializeGame();
@@ -103,15 +106,38 @@ export default class App extends React.Component {
   renderIcon = (row, col) => {
     var value = this.state.gameState[row][col];
     switch (value) {
-      case 1: return <FontAwesome name="close" style={styles.tileX} />;
-      case -1: return <FontAwesome name="circle-o" style={styles.tileO} />;
+      case 1: return <Image style={styles.tileX}
+      source={require('./assets/iron_body.png')}/>;
+      case -1: return <Image style={styles.tileO}
+      source={require('./assets/captain_body.png')}/>;
       default: return <View />
+    }
+  }
+
+  turnPlayer = () => {
+    if(this.state.currentPlayer == 1) {
+      return (
+        <Image style={styles.tileX}
+      source={require('./assets/iron_body.png')}/>
+      )
+    } else if (this.state.currentPlayer == -1) {
+      return (
+        <Image style={styles.tileO}
+      source={require('./assets/captain_body.png')}/>
+      )
     }
   }
 
   render() {
     return (
+      <ImageBackground source={{uri:'https://i.pinimg.com/736x/7f/fc/36/7ffc367e9406b41be32a2ecf9b4fb109.jpg'}} style={{ flex: 1}}>
       <View style={styles.container}>
+
+        <View>
+          <Text style={styles.nextP}>
+            Next turn:{this.turnPlayer()}
+            </Text>
+        </View>
 
         <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
           <TouchableOpacity onPress={() => this.onTilePress(0, 0)} style={[styles.tile, { borderLeftWidth: 0, borderTopWidth: 0 }]}>
@@ -159,6 +185,7 @@ export default class App extends React.Component {
         <Button title='New Game' onPress={this.onNewGamePress} />
 
       </View>
+      </ImageBackground>
     );
   }
 }
@@ -166,7 +193,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'rgba(255, 255, 255, .5)',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -180,12 +207,21 @@ const styles = StyleSheet.create({
   },
 
   tileX: {
-    color: "red",
-    fontSize: 60,
+    width: 50,
+    height:50,
   },
 
   tileO: {
-    color: "green",
-    fontSize: 60,
-  }
+    width: 50,
+    height:50,
+  },
+
+  nextP: {
+    padding:20,
+    alignItems: "center",
+    fontSize: 25,
+    fontWeight: 'bold',
+    color:'#b22222',
+  } 
+  
 });
